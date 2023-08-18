@@ -1,12 +1,13 @@
-import { IsString, IsNotEmpty } from "class-validator";
+import { IsString, IsNotEmpty, IsUrl } from "class-validator";
 
 export class CreateUserDto {
 
-    @IsString()
-    @IsNotEmpty()
+    @IsString({ message: "All fields are required!" })
+    @IsNotEmpty({ message: "All fields are required!" })
     username: string;
 
-    @IsString()
-    @IsNotEmpty()
+    @IsString({ message: "All fields are required!" })
+    @IsNotEmpty({ message: "All fields are required!" })
+    @IsUrl()
     avatar: string;
 }

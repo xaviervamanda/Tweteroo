@@ -9,6 +9,14 @@ export class AppService {
   private users: User[];
   private tweets: Tweet[];
 
+  constructor() {
+    this.users = [];
+    this.tweets = [];
+  }
+
+  getHealth(): string {
+    return "I'm okay!";
+  }
   createUser(body: CreateUserDto){
     const user = new User(body.username, body.avatar);
     return this.users.push(user);

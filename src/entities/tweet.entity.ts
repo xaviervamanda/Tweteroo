@@ -1,4 +1,4 @@
-import { User } from 'src/entities/user.entity';
+import { User } from './user.entity';
 
 export class Tweet extends User {
     user: User;
