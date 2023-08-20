@@ -43,4 +43,8 @@ export class AppService {
     const tweets = this.tweets.reverse();
     return tweets.slice(startIndex, endIndex);
   }
+
+  listUserTweets(username: string){
+    return this.tweets.filter(tweet => tweet.username === username);
+  }
 }
