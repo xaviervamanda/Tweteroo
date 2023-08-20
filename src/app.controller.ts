@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateUserDto } from './dtos/user.dto';
 import { CreateTweetDto } from './dtos/tweet.dto';
@@ -25,8 +25,18 @@ export class AppController {
     try {
       return this.appService.createTweet(body);
     } catch (error){
-      throw error;
+      if (error instanceof HttpException) {
+        throw error;
+      } else {
+        throw new HttpException('An error occurred', HttpStatus.INTERNAL_SERVER_ERROR);
+      }
     }
+  }
+
+  @Get("/tweets")
+
+  listTweets(@Query('page') page: string) {
+    return this.appService.listTweets(page);
   }
 }
 

@@ -24,8 +24,23 @@ export class AppService {
 
   createTweet(body: CreateTweetDto){
     const user = this.users.find(user => user.username === body.username);
+    console.log(user);
     if (!user) throw new HttpException('User not found', HttpStatus.UNAUTHORIZED); 
     const tweet = new Tweet({ username: user.username, avatar: user.avatar}, body.tweet);
+    console.log(tweet);
     return this.tweets.push(tweet);
+  }
+
+  listTweets(page: string){
+    const pageN = Number(page);
+    if (pageN < 1) throw new HttpException('Informe uma página válida!', HttpStatus.BAD_REQUEST);
+    if (!page) {
+      const tweets = this.tweets.reverse();
+      return tweets.slice(0, 15);
+    }
+    const startIndex = (pageN - 1)*15;
+    const endIndex = startIndex + 15;
+    const tweets = this.tweets.reverse();
+    return tweets.slice(startIndex, endIndex);
   }
 }

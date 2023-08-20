@@ -9,6 +9,5 @@ export class CreateTweetDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsUrl()
     tweet: string;
 }
